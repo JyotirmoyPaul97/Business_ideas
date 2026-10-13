@@ -31,3 +31,153 @@ Why it's good: This is a core component of "Smart City" infrastructure. It prove
 Create a decentralized application (DApp) where a university (the issuer) can mint digital degree certificates as non-fungible tokens (NFTs) or verifiable credentials on a blockchain (like Ethereum or Polygon). Employers can then instantly verify the authenticity of a student's degree without contacting the university.
 Why it's good: It solves a real problem (credential fraud) using the exact technology designed for trustless verification. It demonstrates an understanding of Web3 concepts, smart contract development (Solidity), and secure decentralized architecture.
 <img width="2752" height="1536" alt="Gemini_Generated_Image_vmbz7hvmbz7hvmbz" src="https://github.com/user-attachments/assets/68db4cfa-142e-45f1-994e-5fa90728c9e5" />
+
+AI-Powered Resume Screening SaaS:
+
+# 🎯 TalentLens AI — Intelligent Resume Screening & Candidate Ranking Platform
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100.0+-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB.svg)](https://reactjs.org/)
+[![VectorDB](https://img.shields.io/badge/Pinecone-VectorDB-0052CC.svg)](https://www.pinecone.io/)
+
+**TalentLens AI** is an enterprise-grade, privacy-first recruitment automation tool. It replaces legacy keyword-matching ATS (Applicant Tracking Systems) with semantic natural language processing (NLP) and Retrieval-Augmented Generation (RAG) to score, rank, and summarize candidates based on true skill contextual relevance.
+
+---
+
+## 📌 Table of Contents
+- [1. Problem Statement](#1-problem-statement)
+- [2. Our Vision](#2-our-vision)
+- [3. Key Features & Core Modules](#3-key-features--core-modules)
+- [4. Project Architecture](#4-project-architecture)
+- [5. System Workflow](#5-system-workflow)
+- [6. Tech Stack](#6-tech-stack)
+- [7. Installation & Setup](#7-installation--setup)
+- [8. API Reference](#8-api-reference)
+- [9. Future Scope](#9-future-scope)
+- [10. License & Contributors](#10-license--contributors)
+
+---
+
+## 1. 🚨 Problem Statement
+
+Traditional ATS platforms rely heavily on exact string matching and Boolean queries. This approach presents critical bottlenecks in modern hiring:
+
+1. **Keyword Gaming vs. Qualified Talent:** Unqualified applicants gaming their resumes with invisible keywords pass initial screening, while qualified candidates using alternative phrasing get rejected.
+2. **Review Fatigue & High Time-to-Hire:** HR departments spend an average of **6–10 hours per job posting** manually skimming hundreds of applications, causing hiring latency and candidate drop-off.
+3. **Unconscious Bias:** Demographics, university prestige, and geographic markers routinely inject implicit bias into early-stage evaluation cycles.
+
+---
+
+## 2. 👁️ Our Vision
+
+To deliver a transparent, scalable, and bias-reduced screening engine that reduces candidate evaluation time from days to seconds—empowering HR teams to make data-driven, skill-first hiring decisions using semantic AI.
+
+---
+
+## 3. 🧩 Key Features & Core Modules
+
+### 📄 3.1 Multi-Format Document Ingestion & Parsing
+- Ingests bulk uploads of PDF, DOCX, and TXT resumes via asynchronous pipelines.
+- Implements `PDFMiner` and `spaCy` NER pipelines to extract candidate metadata (contact, work history, skill taxonomy, educational background).
+
+### 🧠 3.2 Semantic Scoring Engine (RAG & Vector Embeddings)
+- Converts resume text and Job Descriptions (JDs) into dense vector embeddings using `sentence-transformers/all-MiniLM-L6-v2`.
+- Calculates cosine similarity and contextual match scores, going beyond superficial keyword counts to evaluate experience depth and domain overlap.
+
+### 🙈 3.3 Blind Screening Mode (De-Biasing Layer)
+- Automatically redacts Personally Identifiable Information (PII) including name, age, gender, address, and graduation dates prior to initial scoring.
+
+### 📊 3.4 Interactive HR Analytics Dashboard
+- Provides candidate leaderboard rankings, visual radar charts for skill gaps, custom filtering mechanisms, and automated single-page PDF summary outputs.
+
+---
+
+## 4. 🏗️ Project Architecture
++-----------------------------------------------------------------------------------+
+|                                 USER INTERFACE                                    |
+|                      React.js + Tailwind CSS + Vite SPA                           |
++-----------------------------------------------------------------------------------+
+|
+| HTTP REST / JSON
+v
++-----------------------------------------------------------------------------------+
+|                                 BACKEND API GATEWAY                               |
+|                     FastAPI (Python) Async Request Handlers                       |
++-----------------------------------------------------------------------------------+
+|                                  |                                  |
+v                                  v                                  v
++-----------------------+     +-----------------------+     +-----------------------+
+|  INGESTION PIPELINE   |     |   VECTOR / AI ENGINE   |     |   DATA & STORAGE      |
+|  - PyPDF / pdfminer   |     |  - SentenceTransformer|     |  - PostgreSQL (Meta)  |
+|  - spaCy NER Parser   |     |  - Pinecone VectorDB  |     |  - AWS S3 (Raw Files) |
+|  - PII Redactor       |     |  - Cosine Matcher     |     |                       |
++-----------------------+     +-----------------------+     +-----------------------+
+---
+
+## 5. 🔄 System Workflow
+
+1. **Upload:** Recruiter creates a Job Description (JD) and uploads batch candidate resumes (PDF/DOCX).
+2. **Pre-processing:** Fast-parse text extraction -> PII stripping -> Entity extraction via spaCy.
+3. **Embedding:** Text chunks transformed into 384-dimensional dense vectors using Hugging Face Sentence Transformers.
+4. **Indexing & Query:** Vectors stored in Pinecone; vector cosine distance queried against the JD embedding vector.
+5. **Ranking:** Composite score assigned ($Score = 0.6 \times \text{Semantic Match} + 0.3 \times \text{Skill Overlay} + 0.1 \times \text{Experience Depth}$).
+6. **Output:** Dashboard visualizes candidate leaderboard with match justification notes.
+
+---
+
+## 6. 💻 Tech Stack
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Frontend** | React 18, Tailwind CSS, Lucide Icons, Recharts | Dynamic Dashboard & UI Analytics |
+| **Backend API** | FastAPI, Uvicorn, Pydantic | Asynchronous RESTful Microservices |
+| **NLP & ML** | spaCy, Hugging Face Transformers, PyTorch | Named Entity Recognition & Dense Embeddings |
+| **Vector Search** | Pinecone / PGVector | Similarity Search Engine |
+| **Database** | PostgreSQL (SQLAlchemy ORM) | Relational Storage for Candidates & Jobs |
+| **Storage** | AWS S3 / MinIO | Encrypted Object Storage for Files |
+| **DevOps & CI/CD**| Docker, Docker Compose, GitHub Actions | Containerization & Deployment Pipelines |
+
+---
+## 7. ⚡ Installation & Setup
+
+### Prerequisites
+- Python 3.11+
+- Node.js v18+
+- Docker & Docker Compose (Optional)
+
+### Step 1: Clone the Repository
+bash
+git clone [https://github.com/your-username/talentlens-ai.git](https://github.com/your-username/talentlens-ai.git)
+cd talentlens-ai
+Step 2: Backend Setup
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+Configure .env file in /backend:
+DATABASE_URL=postgresql://user:password@localhost:5432/talentlens
+PINECONE_API_KEY=your_pinecone_key
+PINECONE_ENVIRONMENT=us-west1-gcp
+AWS_S3_BUCKET_NAME=talentlens-resumes
+Start the API server:
+uvicorn app.main:app --reload --port 8000
+Step 3: Frontend Setup
+cd ../frontend
+npm install
+npm run dev
+
+8. 📡 API Reference
+Upload Resume Batch
+POST /api/v1/resumes/upload
+Content-Type: multipart/form-data
+ParameterTypeDescriptionfilesfile[]Array of resume files (PDF, DOCX)job_idstringTarget Job ID for evaluation
+
+9. 🚀 Future Scope
+[ ] RAG-based Chatbot Assistant: Query applicant profiles in natural language (e.g., "Find candidates who scaled Kubernetes clusters in production").
+
+[ ] Multi-Modal Video Screening Integration: Speech-to-text analysis for initial video response evaluations.
+
+[ ] ATS Integration Connectors: Native webhooks for Greenhouse, Lever, and Workday.
