@@ -30,3 +30,4 @@ Why it's good: This is a core component of "Smart City" infrastructure. It prove
 10. Blockchain-Based Academic Credential Verification
 Create a decentralized application (DApp) where a university (the issuer) can mint digital degree certificates as non-fungible tokens (NFTs) or verifiable credentials on a blockchain (like Ethereum or Polygon). Employers can then instantly verify the authenticity of a student's degree without contacting the university.
 Why it's good: It solves a real problem (credential fraud) using the exact technology designed for trustless verification. It demonstrates an understanding of Web3 concepts, smart contract development (Solidity), and secure decentralized architecture.
+<img width="2752" height="1536" alt="Gemini_Generated_Image_vmbz7hvmbz7hvmbz" src="https://github.com/user-attachments/assets/68db4cfa-142e-45f1-994e-5fa90728c9e5" />
