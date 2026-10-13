@@ -169,11 +169,15 @@ cd ../frontend
 npm install
 npm run dev
 
+---
+
 ##8. 📡 API Reference
 Upload Resume Batch
 POST /api/v1/resumes/upload
 Content-Type: multipart/form-data
 ParameterTypeDescriptionfilesfile[]Array of resume files (PDF, DOCX)job_idstringTarget Job ID for evaluation
+
+---
 
 ##9. 🚀 Future Scope
 [ ] RAG-based Chatbot Assistant: Query applicant profiles in natural language (e.g., "Find candidates who scaled Kubernetes clusters in production").
